@@ -13,13 +13,7 @@
         max-width: 500px;
         padding: 20px;
         border-radius: 15px;
-        
 
-        .p__app__container__minuts__level {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-        }
 
         .p__app__termporizador__container {
             width: 100%;
@@ -58,7 +52,55 @@
             }
         }
 
-        .p__app__btn{
+        .p__app__container__rounds {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            width: 100%;
+            padding-top: 40px;
+            padding-bottom: 10px;
+
+
+            .rounds__counter {
+                display: flex;
+                justify-content: center;
+
+                width: 100%;
+                color: var(--color-main-ligth);
+            }
+
+            .round__position__qty {
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+                width: 100%;
+                padding-top: 5px;
+
+                .round {
+                    width: 15px;
+                    height: 15px;
+                    border-radius: 50%;
+                    box-shadow: -4px -4px 8px var(--shadow-ligth),
+                        4px 4px 8px var(--shadow-ligth);
+                    background-color: var(--color-black-dark);
+                }
+
+                .round__position {
+                    width: 25px;
+                    border-radius: 20px;
+                    background-image: -webkit-linear-gradient(left top, var(--color-main-dark), var(--color-main-ligth));
+
+
+                }
+            }
+        }
+
+        .p__app__btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+            gap: 5px;
             width: 100px;
             padding: 12px;
             border-radius: 100px;
@@ -66,18 +108,21 @@
             outline: none;
             border: none;
             box-shadow: -8px -8px 12px var(--shadow-ligth),
-            8px 8px 12px var(--shadow-dark);
-            background-image: -webkit-linear-gradient(left top, rgb(2, 91, 255), var(--color-main));
+                8px 8px 12px var(--shadow-dark);
             cursor: pointer;
+
+            img {
+                width: 15px;
+            }
         }
 
-        .p__app__btn__play__container{
+        .p__app__btn__play__container {
             display: flex;
             justify-content: center;
             width: 100%;
             margin-top: 30px;
 
-            #p__app__btn__play{
+            #p__app__btn__play {
                 width: 100%;
                 padding: 12px;
                 border-radius: 100px;
@@ -86,14 +131,14 @@
             }
         }
 
-        .p__app__buttons__container{
+        .p__app__buttons__container {
             display: flex;
             justify-content: space-between;
             gap: 30px;
             width: 100%;
             margin-top: 40px;
 
-            button{
+            button {
                 width: 50%;
             }
         }
