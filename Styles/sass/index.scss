@@ -1,0 +1,101 @@
+.p__app__section__home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 30px;
+
+    .p__app__container {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 400px;
+        padding: 20px;
+        border-radius: 15px;
+        
+
+        .p__app__container__minuts__level {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .p__app__termporizador__container {
+            width: 100%;
+            margin-top: 40px;
+
+            .p__app__termporizador {
+                width: 100%;
+                margin: 0px auto;
+                border-radius: 50%;
+                border: 10px solid var(--color-black-dark);
+                box-shadow: -20px -20px 30px var(--shadow-ligth),
+                    20px 20px 30px var(--shadow-dark);
+                background-color: var(--color-black-dark);
+
+                .p__app__progress__bar {
+                    width: 100%;
+                    height: 100%;
+                    padding: 10px;
+                    border-radius: 50%;
+                    background-image: conic-gradient(var(--color-main-dark), 360deg, var(--color-black-medium) 0deg);
+
+                    .p__app__number__temporizador__container {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 50%;
+                        font-size: 40px;
+                        font-weight: 800;
+                        background-color: var(--color-black-dark);
+                        box-shadow: -2px -2px 4px var(--shadow-ligth),
+                            2px 2px 4px var(--shadow-dark);
+                    }
+                }
+            }
+        }
+
+        .p__app__btn{
+            width: 100px;
+            padding: 12px;
+            border-radius: 100px;
+            background-color: var(--color-black-dark);
+            outline: none;
+            border: none;
+            box-shadow: -8px -8px 12px var(--shadow-ligth),
+            8px 8px 12px var(--shadow-dark);
+            background-image: -webkit-linear-gradient(left top, rgb(2, 91, 255), var(--color-main));
+            cursor: pointer;
+        }
+
+        .p__app__btn__play__container{
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin-top: 30px;
+
+            #p__app__btn__play{
+                width: 100%;
+                padding: 12px;
+                border-radius: 100px;
+                font-size: 24px;
+                background-image: -webkit-linear-gradient(left top, var(--color-main-dark), var(--color-main-ligth));
+            }
+        }
+
+        .p__app__buttons__container{
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            width: 100%;
+            margin-top: 40px;
+
+            button{
+                width: 50%;
+            }
+        }
+    }
+}
