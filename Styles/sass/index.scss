@@ -10,7 +10,7 @@
     .p__app__container {
         display: flex;
         flex-wrap: wrap;
-        max-width: 500px;
+        max-width: 600px;
         padding: 20px;
         border-radius: 15px;
 
@@ -51,14 +51,21 @@
                             display: flex;
                             justify-content: center;
                             align-items: center;
+                            align-content: center;
+                            gap: 10px;
                             width: 100%;
                             height: 100%;
-                            border-radius: 50%;
                             font-size: 60px;
                             font-weight: 800;
+                            border-radius: 50%;
                             background-color: var(--color-black-dark);
                             box-shadow: -4px -4px 8px var(--shadow-ligth),
                                 4px 4px 8px var(--shadow-ligth);
+
+                            span {
+                                font-size: 60px;
+                                font-weight: 800;
+                            }
                         }
                     }
                 }
@@ -135,14 +142,15 @@
             width: 100%;
             margin-top: 30px;
 
-            #p__app__btn__play {
+            #p__app__btn__play,
+            #p__app__btn__pause {
                 width: 100%;
                 padding: 12px;
                 border-radius: 100px;
                 font-size: 24px;
-                font-weight: 600;
                 background-image: -webkit-linear-gradient(left top, var(--color-main-dark), var(--color-main-ligth));
             }
+
         }
 
         .p__app__buttons__container {
