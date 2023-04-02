@@ -3,13 +3,11 @@
 // la pantalla solo si la ventana es menor o igual a 1024 px.
 
 function lockPotraitOrientation() {
-    const windowWidth = window.innerWidth;
-    if (windowWidth <= 1024) {
-        if (screen.orientation) {
-            // Bloquear la orientación en modo retrato
-            screen.orientation.lock('portrait');
-        } else {
-            console.log('La API Screen Orientation no es compatible con este navegador.');
-        }
+    const mediaQuery = window.matchMedia("(max-width: 1024px)");
+
+    if (mediaQuery.matches && screen.orientation) {
+        screen.orientation.lock('portrait');
+    } else {
+        console.log('La API Screen Orientation no es compatible con este navegador o la pantalla es demasiado grande.');
     }
 }
