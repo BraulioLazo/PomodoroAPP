@@ -76,5 +76,5 @@ function resetTimer(interval) {
         '</button>';
     };
 
-
+    
 }
