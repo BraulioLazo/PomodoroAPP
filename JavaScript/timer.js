@@ -27,7 +27,6 @@ function startTimer() {
                 minutsContainer.innerHTML = "0" + minuts;
             }
         }
-
         secondsContainer.innerHTML = seconds;
 
         if (seconds < 10) {
@@ -45,12 +44,37 @@ function startTimer() {
         '<img src="Images/app__pause__image.png" alt="">' +
         'Pause';
     '</button>';
+
+    resetTimer(timerInterval);
 }
 
 function pauseTimer(intervalo) {
     clearInterval(intervalo);
-    document.querySelector(".p__app__btn__play__container").innerHTML = '<button class="p__app__btn" id="p__app__btn__play" onclick="startTimer()">' +
+    document.querySelector(".p__app__btn__play__container").innerHTML =
+        '<button class="p__app__btn" id="p__app__btn__play" onclick="startTimer()">' +
         '<img src="Images/app__play__image.png" alt="">' +
         'Start';
     '</button>';
+}
+
+function resetTimer(interval) {
+   
+    const resetButton = document.querySelector("#p__app__reset__button");
+    resetButton.onclick = () => {
+        clearInterval(interval);
+        const workingCustomTime = parseInt(localStorage.getItem("workingCustomTime"));
+
+        minutsContainer.innerHTML = workingCustomTime;
+        secondsContainer.innerHTML = "00";
+        minuts = workingCustomTime;
+        seconds = 0;
+
+        document.querySelector(".p__app__btn__play__container").innerHTML =
+            '<button class="p__app__btn" id="p__app__btn__play" onclick="startTimer()">' +
+            '<img src="Images/app__play__image.png" alt="">' +
+            'Start';
+        '</button>';
+    };
+
+
 }
