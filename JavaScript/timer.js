@@ -4,6 +4,7 @@ let minuts;
 let seconds = 0;
 
 function startTimer() {
+    compatibilityWakeLock();
 
     if (localStorage.getItem("workingCustomTime")) {
         const workingCustomTime = parseInt(localStorage.getItem("workingCustomTime"));
@@ -25,6 +26,7 @@ function startTimer() {
 
             if (minuts < 10) {
                 minutsContainer.innerHTML = "0" + minuts;
+
             }
         }
         secondsContainer.innerHTML = seconds;
@@ -33,9 +35,16 @@ function startTimer() {
             secondsContainer.innerHTML = "0" + seconds;
         }
 
-        document.querySelector("#p__app__btn__pause").addEventListener("click", () => {
-            pauseTimer(timerInterval);
-        });
+        if (minuts === 0 && seconds == 0) {
+            clearInterval(timerInterval);
+            disableScreenLock();
+
+            document.querySelector(".p__app__btn__play__container").innerHTML =
+                '<button class="p__app__btn" id="p__app__btn__play" onclick="startTimer()">' +
+                '<img src="Images/app__play__image.png" alt="">' +
+                'Start';
+            '</button>';
+        }
     }
     let timerInterval = setInterval(timer, 1000);
 
@@ -48,6 +57,7 @@ function startTimer() {
     resetTimer(timerInterval);
 }
 
+
 function pauseTimer(intervalo) {
     clearInterval(intervalo);
     document.querySelector(".p__app__btn__play__container").innerHTML =
@@ -58,10 +68,12 @@ function pauseTimer(intervalo) {
 }
 
 function resetTimer(interval) {
-   
+
     const resetButton = document.querySelector("#p__app__reset__button");
     resetButton.onclick = () => {
         clearInterval(interval);
+        disableScreenLock();
+
         const workingCustomTime = parseInt(localStorage.getItem("workingCustomTime"));
 
         minutsContainer.innerHTML = workingCustomTime;
@@ -76,5 +88,5 @@ function resetTimer(interval) {
         '</button>';
     };
 
-    
+
 }

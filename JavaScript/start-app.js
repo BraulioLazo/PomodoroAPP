@@ -1,6 +1,4 @@
 function startAPP() {
-    keepScreenOn();
-    lockPotraitOrientation();
     temporizadorStyles();
     window.onresize = () => { temporizadorStyles(); };
 
@@ -8,7 +6,6 @@ function startAPP() {
     buttonStartTimer.addEventListener("click", () => {
         startTimer();
     });
-
 }
 window.addEventListener("load", startAPP);
 
