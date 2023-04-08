@@ -1,14 +1,9 @@
 const minutsContainer = document.querySelector(".minuts__container");
 const secondsContainer = document.querySelector(".seconds__container");
+let minuts;
+let seconds = 0;
 
-function startTimer() {
-
-    const workingCustomTime = parseInt(localStorage.getItem("workingCustomTime") * 60);
-    let newWorkingCustomTime = workingCustomTime;
-    let minuts;
-    let seconds = 0;
-    wakeLockAPI.checkCompatibility();
-
+function setDefaultCustomTime() {
     if (localStorage.getItem("workingCustomTime")) {
         const workingCustomTime = parseInt(localStorage.getItem("workingCustomTime"));
         minuts = workingCustomTime;
@@ -17,10 +12,21 @@ function startTimer() {
         const workingCustomTime = parseInt(localStorage.getItem("workingCustomTime"));
         minuts = workingCustomTime;
     }
+}
+setDefaultCustomTime();
+
+const workingCustomTime = parseInt(localStorage.getItem("workingCustomTime") * 60);
+let newWorkingCustomTime = workingCustomTime;
+
+function startTimer() {
+
+
+    wakeLockAPI.checkCompatibility();
 
     function timer() {
         seconds--;
         newWorkingCustomTime--;
+        console.log(newWorkingCustomTime);
         progressBar(newWorkingCustomTime);
 
         if (seconds < 0) {
@@ -50,8 +56,6 @@ function startTimer() {
                 'Start';
             '</button>';
         }
-
-
     }
     let timerInterval = setInterval(timer, 1000);
 
@@ -75,26 +79,31 @@ function pauseTimer(intervalo) {
 }
 
 function resetTimer(interval) {
-
     const resetButton = document.querySelector("#p__app__reset__button");
+  
     resetButton.onclick = () => {
-        clearInterval(interval);
-        wakeLockAPI.unlockScreen();
-
-        const workingCustomTime = parseInt(localStorage.getItem("workingCustomTime"));
-
-        minutsContainer.innerHTML = workingCustomTime;
-        secondsContainer.innerHTML = "00";
-        minuts = workingCustomTime;
-        seconds = 0;
-
-        document.querySelector(".p__app__btn__play__container").innerHTML =
-            '<button class="p__app__btn" id="p__app__btn__play" onclick="startTimer()">' +
-            '<img src="Images/app__play__image.png" alt="">' +
-            'Start';
+      clearInterval(interval);
+      wakeLockAPI.unlockScreen();
+  
+      const workingCustomTime = parseInt(localStorage.getItem("workingCustomTime"));
+      const newWorkingCustomTime = workingCustomTime * 60;
+  
+      progressBar(newWorkingCustomTime);
+  
+      minutsContainer.innerHTML = workingCustomTime;
+      secondsContainer.innerHTML = "00";
+      minuts = workingCustomTime;
+      seconds = 0;
+  
+      document.querySelector(".p__app__btn__play__container").innerHTML =
+        '<button class="p__app__btn" id="p__app__btn__play" onclick="startTimer()">' +
+        '<img src="Images/app__play__image.png" alt="">' +
+        'Start' +
         '</button>';
     };
-}
+  }
+  
+
 
 function progressBar(newWorkingCustomTime) {
     const progressBar = document.querySelector(".p__app__progress__bar");
