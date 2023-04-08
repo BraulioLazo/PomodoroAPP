@@ -55,16 +55,40 @@
                             gap: 10px;
                             width: 100%;
                             height: 100%;
-                            font-size: 60px;
-                            font-weight: 800;
+
                             border-radius: 50%;
                             background-color: var(--color-black-dark);
                             box-shadow: -4px -4px 8px var(--shadow-ligth),
                                 4px 4px 8px var(--shadow-ligth);
 
-                            span {
+                            .timer__container__timer {
+                                position: relative;
+                                text-align: center;
+                                width: 160px;
                                 font-size: 60px;
                                 font-weight: 800;
+                            }
+
+
+                            span {
+                                position: absolute;
+                                width: 50px;
+                                /* valor fijo */
+                                font-size: 60px;
+                                font-weight: 800;
+                                text-align: center;
+
+                            }
+
+
+
+                            .minuts__container {
+                                left: -15px;
+
+                            }
+
+                            .seconds__container {
+                                right: 15px;
                             }
                         }
                     }
