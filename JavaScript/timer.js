@@ -4,7 +4,7 @@ let minuts;
 let seconds = 0;
 
 function startTimer() {
-    compatibilityWakeLock();
+    wakeLockAPI.checkCompatibility();
 
     if (localStorage.getItem("workingCustomTime")) {
         const workingCustomTime = parseInt(localStorage.getItem("workingCustomTime"));
@@ -37,7 +37,7 @@ function startTimer() {
 
         if (minuts === 0 && seconds == 0) {
             clearInterval(timerInterval);
-            disableScreenLock();
+            wakeLockAPI.unlockScreen();
 
             document.querySelector(".p__app__btn__play__container").innerHTML =
                 '<button class="p__app__btn" id="p__app__btn__play" onclick="startTimer()">' +
@@ -72,7 +72,7 @@ function resetTimer(interval) {
     const resetButton = document.querySelector("#p__app__reset__button");
     resetButton.onclick = () => {
         clearInterval(interval);
-        disableScreenLock();
+        wakeLockAPI.unlockScreen();
 
         const workingCustomTime = parseInt(localStorage.getItem("workingCustomTime"));
 
@@ -87,6 +87,5 @@ function resetTimer(interval) {
             'Start';
         '</button>';
     };
-
 
 }
