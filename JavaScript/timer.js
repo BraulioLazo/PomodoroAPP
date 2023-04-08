@@ -1,9 +1,12 @@
 const minutsContainer = document.querySelector(".minuts__container");
 const secondsContainer = document.querySelector(".seconds__container");
-let minuts;
-let seconds = 0;
 
 function startTimer() {
+
+    const workingCustomTime = parseInt(localStorage.getItem("workingCustomTime") * 60);
+    let newWorkingCustomTime = workingCustomTime;
+    let minuts;
+    let seconds = 0;
     wakeLockAPI.checkCompatibility();
 
     if (localStorage.getItem("workingCustomTime")) {
@@ -17,6 +20,8 @@ function startTimer() {
 
     function timer() {
         seconds--;
+        newWorkingCustomTime--;
+        progressBar(newWorkingCustomTime);
 
         if (seconds < 0) {
             seconds = 59;
@@ -45,6 +50,8 @@ function startTimer() {
                 'Start';
             '</button>';
         }
+
+
     }
     let timerInterval = setInterval(timer, 1000);
 
@@ -87,5 +94,11 @@ function resetTimer(interval) {
             'Start';
         '</button>';
     };
+}
 
+function progressBar(newWorkingCustomTime) {
+    const progressBar = document.querySelector(".p__app__progress__bar");
+    const workingCustomTime = parseInt(localStorage.getItem("workingCustomTime") * 60);
+    let porcent = (newWorkingCustomTime * 100 / workingCustomTime) * 3.6;
+    progressBar.style.backgroundImage = `conic-gradient(var(--color-main-dark), ${porcent}deg, var(--color-black-medium) 0deg)`;
 }
