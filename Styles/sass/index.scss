@@ -108,9 +108,15 @@
             .rounds__counter {
                 display: flex;
                 justify-content: center;
-
                 width: 100%;
-                color: var(--color-main-ligth);
+
+                .actual__round {
+                    color: var(--color-main-ligth);
+                }
+
+                .total__rounds{
+                    margin-left: 5px;
+                }
             }
 
             .round__position__qty {

@@ -2,9 +2,11 @@ function startAPP() {
     temporizadorStyles();
     window.onresize = () => { temporizadorStyles(); };
 
+    timerAPP.setDefaultTimer();
+
     let buttonStartTimer = document.querySelector("#p__app__btn__play");
     buttonStartTimer.addEventListener("click", () => {
-        startTimer();
+        timerAPP.startTimerAPP();
     });
 }
 window.addEventListener("load", startAPP);

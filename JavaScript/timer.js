@@ -1,113 +1,95 @@
-const minutsContainer = document.querySelector(".minuts__container");
-const secondsContainer = document.querySelector(".seconds__container");
-let minuts;
-let seconds = 0;
-
-function setDefaultCustomTime() {
-    if (localStorage.getItem("workingCustomTime")) {
-        const workingCustomTime = parseInt(localStorage.getItem("workingCustomTime"));
-        minuts = workingCustomTime;
-    } else {
-        localStorage.setItem("workingCustomTime", "25");
-        const workingCustomTime = parseInt(localStorage.getItem("workingCustomTime"));
-        minuts = workingCustomTime;
-    }
-}
-setDefaultCustomTime();
-
-const workingCustomTime = parseInt(localStorage.getItem("workingCustomTime") * 60);
-let newWorkingCustomTime = workingCustomTime;
-
-function startTimer() {
 
 
-    wakeLockAPI.checkCompatibility();
+const timerAPP = {
+    minuts: 0,
+    seconds: 0,
+    isBreakTime: false,
 
-    function timer() {
-        seconds--;
-        newWorkingCustomTime--;
-        console.log(newWorkingCustomTime);
-        progressBar(newWorkingCustomTime);
+    setDefaultTimer: () => {
 
-        if (seconds < 0) {
-            seconds = 59;
-            minuts--;
+        if (localStorage.getItem("defaultMinuts")) {
+            timerAPP.minuts = parseInt(localStorage.getItem("defaultMinuts"));
+            document.querySelector(".minuts__container").innerHTML = timerAPP.minuts;
 
-            minutsContainer.innerHTML = minuts;
+            if (timerAPP.minuts < 10) {
+                document.querySelector(".minuts__container").innerHTML = "0" + timerAPP.minuts;
+            }
+        } else {
+            localStorage.setItem("defaultMinuts", "8");
+            timerAPP.minuts = parseInt(localStorage.getItem("defaultMinuts"));
+            document.querySelector(".minuts__container").innerHTML = timerAPP.minuts;
 
-            if (minuts < 10) {
-                minutsContainer.innerHTML = "0" + minuts;
-
+            if (timerAPP.minuts < 10) {
+                document.querySelector(".minuts__container").innerHTML = "0" + timerAPP.minuts;
             }
         }
-        secondsContainer.innerHTML = seconds;
 
-        if (seconds < 10) {
-            secondsContainer.innerHTML = "0" + seconds;
+        if (localStorage.getItem("shortBreak")) {
+            timerAPP.shortBreak = parseInt(localStorage.getItem("shortBreak"));
+        } else {
+            localStorage.setItem("shortBreak", "5");
+            timerAPP.shortBreak = parseInt(localStorage.getItem("shortBreak"));
         }
 
-        if (minuts === 0 && seconds == 0) {
-            clearInterval(timerInterval);
-            wakeLockAPI.unlockScreen();
+        if (localStorage.getItem("longBreak")) {
+            timerAPP.longBreak = parseInt(localStorage.getItem("longBreak"));
+        } else {
+            localStorage.setItem("longBreak", "15");
+            timerAPP.longBreak = parseInt(localStorage.getItem("longBreak"));
 
-            document.querySelector(".p__app__btn__play__container").innerHTML =
-                '<button class="p__app__btn" id="p__app__btn__play" onclick="startTimer()">' +
-                '<img src="Images/app__play__image.png" alt="">' +
-                'Start';
-            '</button>';
+        }
+    },
+
+    startTimerAPP: () => {
+        const interval = setInterval(() => {
+            timerAPP.seconds--;
+
+            const secondsContainer = document.querySelector(".seconds__container");
+            secondsContainer.innerHTML = timerAPP.seconds;
+
+            const minutsContainer = document.querySelector(".minuts__container");
+            if (timerAPP.seconds < 0) {
+                timerAPP.seconds = 1;
+
+                timerAPP.minuts--;
+                minutsContainer.innerHTML = timerAPP.minuts;
+
+                if (timerAPP.minuts < 10) {
+                    minutsContainer.innerHTML = "0" + timerAPP.minuts;
+                }
+                if (timerAPP.minuts <= 0) {
+                    clearInterval(interval);
+                    timerAPP.seconds = 0;
+
+                    timerAPP.isBreakTime = !timerAPP.isBreakTime;
+                    if (timerAPP.isBreakTime === true) {
+                        timerAPP.startShortBreak();
+                    } else {
+                        timerAPP.minuts = parseInt(localStorage.getItem("defaultMinuts"));
+                        const minutsContainer = document.querySelector(".minuts__container");
+                        minutsContainer.innerHTML = timerAPP.minuts;
+
+                        if (timerAPP.minuts < 10) {
+                            minutsContainer.innerHTML = "0" + timerAPP.minuts;
+                        }
+                    }
+                }
+            }
+
+            if (timerAPP.seconds < 10) {
+                secondsContainer.innerHTML = "0" + timerAPP.seconds;
+            }
+        }, 1000);
+    },
+
+    startShortBreak: () => {
+        timerAPP.minuts = parseInt(localStorage.getItem("shortBreak"));
+        const minutsContainer = document.querySelector(".minuts__container");
+        minutsContainer.innerHTML = timerAPP.minuts;
+
+        if (timerAPP.minuts < 10) {
+            minutsContainer.innerHTML = "0" + timerAPP.minuts;
         }
     }
-    let timerInterval = setInterval(timer, 1000);
 
-    document.querySelector(".p__app__btn__play__container").innerHTML =
-        '<button class="p__app__btn" id="p__app__btn__pause" onclick="pauseTimer(\'' + timerInterval + '\')">' +
-        '<img src="Images/app__pause__image.png" alt="">' +
-        'Pause';
-    '</button>';
-
-    resetTimer(timerInterval);
-}
-
-
-function pauseTimer(intervalo) {
-    clearInterval(intervalo);
-    document.querySelector(".p__app__btn__play__container").innerHTML =
-        '<button class="p__app__btn" id="p__app__btn__play" onclick="startTimer()">' +
-        '<img src="Images/app__play__image.png" alt="">' +
-        'Start';
-    '</button>';
-}
-
-function resetTimer(interval) {
-    const resetButton = document.querySelector("#p__app__reset__button");
-  
-    resetButton.onclick = () => {
-      clearInterval(interval);
-      wakeLockAPI.unlockScreen();
-  
-      const workingCustomTime = parseInt(localStorage.getItem("workingCustomTime"));
-      const newWorkingCustomTime = workingCustomTime * 60;
-  
-      progressBar(newWorkingCustomTime);
-  
-      minutsContainer.innerHTML = workingCustomTime;
-      secondsContainer.innerHTML = "00";
-      minuts = workingCustomTime;
-      seconds = 0;
-  
-      document.querySelector(".p__app__btn__play__container").innerHTML =
-        '<button class="p__app__btn" id="p__app__btn__play" onclick="startTimer()">' +
-        '<img src="Images/app__play__image.png" alt="">' +
-        'Start' +
-        '</button>';
-    };
-  }
-  
-
-
-function progressBar(newWorkingCustomTime) {
-    const progressBar = document.querySelector(".p__app__progress__bar");
-    const workingCustomTime = parseInt(localStorage.getItem("workingCustomTime") * 60);
-    let porcent = (newWorkingCustomTime * 100 / workingCustomTime) * 3.6;
-    progressBar.style.backgroundImage = `conic-gradient(var(--color-main-dark), ${porcent}deg, var(--color-black-medium) 0deg)`;
-}
+};
