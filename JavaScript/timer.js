@@ -1,8 +1,7 @@
-
-
 const timerAPP = {
     minuts: 0,
     seconds: 0,
+    worksCounter: 0,
     isBreakTime: false,
 
     setDefaultTimer: () => {
@@ -15,7 +14,7 @@ const timerAPP = {
                 document.querySelector(".minuts__container").innerHTML = "0" + timerAPP.minuts;
             }
         } else {
-            localStorage.setItem("defaultMinuts", "8");
+            localStorage.setItem("defaultMinuts", "25");
             timerAPP.minuts = parseInt(localStorage.getItem("defaultMinuts"));
             document.querySelector(".minuts__container").innerHTML = timerAPP.minuts;
 
@@ -38,9 +37,17 @@ const timerAPP = {
             timerAPP.longBreak = parseInt(localStorage.getItem("longBreak"));
 
         }
+
+        if (localStorage.getItem("worksCounter")) {
+            timerAPP.worksCounter = parseInt(localStorage.getItem("worksCounter"));
+        } else {
+            localStorage.setItem("worksCounter", "0");
+            timerAPP.worksCounter = parseInt(localStorage.getItem("worksCounter"));
+        }
     },
 
     startTimerAPP: () => {
+
         const interval = setInterval(() => {
             timerAPP.seconds--;
 
@@ -63,7 +70,16 @@ const timerAPP = {
 
                     timerAPP.isBreakTime = !timerAPP.isBreakTime;
                     if (timerAPP.isBreakTime === true) {
+                        timerAPP.worksCounter++;
+                        localStorage.setItem("worksCounter", timerAPP.worksCounter);
+
                         timerAPP.startShortBreak();
+
+                        if (timerAPP.isBreakTime === true && timerAPP.worksCounter == 3) {
+                            timerAPP.startLongBreak();
+                            timerAPP.worksCounter = 0;
+                            localStorage.setItem("worksCounter", timerAPP.worksCounter);
+                        }
                     } else {
                         timerAPP.minuts = parseInt(localStorage.getItem("defaultMinuts"));
                         const minutsContainer = document.querySelector(".minuts__container");
@@ -80,6 +96,12 @@ const timerAPP = {
                 secondsContainer.innerHTML = "0" + timerAPP.seconds;
             }
         }, 1000);
+
+        document.querySelector("#p__app__btn__play").outerHTML =
+            '<button class="p__app__btn" id="p__app__btn__pause" onclick="timerAPP.isPaused(\'' + interval + '\')">' +
+            '<img src="Images/app__pause__image.png" alt="">' +
+            'Pause' +
+            '</button>';
     },
 
     startShortBreak: () => {
@@ -90,6 +112,25 @@ const timerAPP = {
         if (timerAPP.minuts < 10) {
             minutsContainer.innerHTML = "0" + timerAPP.minuts;
         }
+    },
+
+    startLongBreak: () => {
+        timerAPP.minuts = parseInt(localStorage.getItem("longBreak"));
+        const minutsContainer = document.querySelector(".minuts__container");
+        minutsContainer.innerHTML = timerAPP.minuts;
+
+        if (timerAPP.minuts < 10) {
+            minutsContainer.innerHTML = "0" + timerAPP.minuts;
+        }
+    },
+
+    isPaused: (interval) => {
+        clearInterval(interval);
+        document.querySelector("#p__app__btn__pause").outerHTML =
+            '<button class="p__app__btn" id="p__app__btn__play" onclick="timerAPP.startTimerAPP()">' +
+            '<img src="Images/app__play__image.png" alt="">' +
+            'Start' +
+            '</button>';
     }
 
 };

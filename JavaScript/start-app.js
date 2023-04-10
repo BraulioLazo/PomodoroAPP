@@ -4,7 +4,7 @@ function startAPP() {
 
     timerAPP.setDefaultTimer();
 
-    let buttonStartTimer = document.querySelector("#p__app__btn__play");
+    const buttonStartTimer = document.querySelector("#p__app__btn__play");
     buttonStartTimer.addEventListener("click", () => {
         timerAPP.startTimerAPP();
     });
