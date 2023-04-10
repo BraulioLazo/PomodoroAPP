@@ -8,6 +8,10 @@ function startAPP() {
     buttonStartTimer.addEventListener("click", () => {
         timerAPP.startTimerAPP();
     });
+
+    document.querySelector("#p__app__customize__button").onclick = () =>{
+        timerAPP.temporaryReset();
+    }
 }
 window.addEventListener("load", startAPP);
 

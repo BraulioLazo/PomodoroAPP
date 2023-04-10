@@ -14,7 +14,7 @@ const timerAPP = {
                 document.querySelector(".minuts__container").innerHTML = "0" + timerAPP.minuts;
             }
         } else {
-            localStorage.setItem("defaultMinuts", "25");
+            localStorage.setItem("defaultMinuts", "5");
             timerAPP.minuts = parseInt(localStorage.getItem("defaultMinuts"));
             document.querySelector(".minuts__container").innerHTML = timerAPP.minuts;
 
@@ -26,14 +26,14 @@ const timerAPP = {
         if (localStorage.getItem("shortBreak")) {
             timerAPP.shortBreak = parseInt(localStorage.getItem("shortBreak"));
         } else {
-            localStorage.setItem("shortBreak", "5");
+            localStorage.setItem("shortBreak", "2");
             timerAPP.shortBreak = parseInt(localStorage.getItem("shortBreak"));
         }
 
         if (localStorage.getItem("longBreak")) {
             timerAPP.longBreak = parseInt(localStorage.getItem("longBreak"));
         } else {
-            localStorage.setItem("longBreak", "15");
+            localStorage.setItem("longBreak", "3");
             timerAPP.longBreak = parseInt(localStorage.getItem("longBreak"));
 
         }
@@ -47,6 +47,8 @@ const timerAPP = {
     },
 
     startTimerAPP: () => {
+
+        wakeLockAPI.requestScreenLock();
 
         const interval = setInterval(() => {
             timerAPP.seconds--;
@@ -66,6 +68,7 @@ const timerAPP = {
                 }
                 if (timerAPP.minuts <= 0) {
                     clearInterval(interval);
+                    wakeLockAPI.unlockScreen();
                     timerAPP.seconds = 0;
 
                     timerAPP.isBreakTime = !timerAPP.isBreakTime;
@@ -109,6 +112,12 @@ const timerAPP = {
         const minutsContainer = document.querySelector(".minuts__container");
         minutsContainer.innerHTML = timerAPP.minuts;
 
+        document.querySelector("#p__app__btn__pause").outerHTML =
+            '<button class="p__app__btn" id="p__app__btn__play" onclick="timerAPP.startTimerAPP()">' +
+            '<img src="Images/app__play__image.png" alt="">' +
+            'Start' +
+            '</button>';
+
         if (timerAPP.minuts < 10) {
             minutsContainer.innerHTML = "0" + timerAPP.minuts;
         }
@@ -118,6 +127,12 @@ const timerAPP = {
         timerAPP.minuts = parseInt(localStorage.getItem("longBreak"));
         const minutsContainer = document.querySelector(".minuts__container");
         minutsContainer.innerHTML = timerAPP.minuts;
+
+        document.querySelector("#p__app__btn__pause").outerHTML =
+            '<button class="p__app__btn" id="p__app__btn__play" onclick="timerAPP.startTimerAPP()">' +
+            '<img src="Images/app__play__image.png" alt="">' +
+            'Start' +
+            '</button>';
 
         if (timerAPP.minuts < 10) {
             minutsContainer.innerHTML = "0" + timerAPP.minuts;
@@ -131,6 +146,10 @@ const timerAPP = {
             '<img src="Images/app__play__image.png" alt="">' +
             'Start' +
             '</button>';
+    },
+
+    temporaryReset: () => {
+        localStorage.clear();
     }
 
 };
