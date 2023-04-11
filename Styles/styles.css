@@ -123,6 +123,9 @@ body {
 .p__app__section__home .p__app__container .p__app__container__rounds .rounds__counter .total__rounds {
   margin-left: 5px;
 }
+.p__app__section__home .p__app__container .p__app__container__rounds .rounds__counter p {
+  color: var(--color-main-ligth);
+}
 .p__app__section__home .p__app__container .p__app__container__rounds .round__position__qty {
   display: flex;
   justify-content: center;
