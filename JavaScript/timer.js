@@ -152,6 +152,7 @@ const timerAPP = {
         }
     },
 
+
     isPaused: (interval) => {
         clearInterval(interval);
         document.querySelector("#p__app__btn__pause").outerHTML =
@@ -164,7 +165,11 @@ const timerAPP = {
     restartTimerAPP: (interval) => {
         clearInterval(interval);
         timerAPP.minuts = parseInt(localStorage.getItem("defaultMinuts"));
-        document.querySelector(".minuts__container").innerHTML = "0" + timerAPP.minuts;
+        if(timerAPP.minuts < 10){
+            document.querySelector(".minuts__container").innerHTML = "0" + timerAPP.minuts;
+        } else {
+            document.querySelector(".minuts__container").innerHTML = timerAPP.minuts;
+        }
 
         timerAPP.seconds = 0;
         document.querySelector(".seconds__container").innerHTML = "0" + timerAPP.seconds;
