@@ -2,8 +2,11 @@ const timerAPP = {
     minuts: 0,
     seconds: 0,
     worksCounter: 0,
+    totalSeconds: 0,
+    actualSeconds: 0,
     totalRounds: null,
     isBreakTime: false,
+
 
     setDefaultTimer: () => {
 
@@ -55,6 +58,9 @@ const timerAPP = {
             timerAPP.totalRounds = parseInt(localStorage.getItem("totalRounds"));
             document.querySelector(".total__rounds").innerHTML = timerAPP.totalRounds;
         }
+
+        timerAPP.totalSeconds = timerAPP.minuts * 60;
+        timerAPP.actualSeconds = timerAPP.totalSeconds;
     },
 
     startTimerAPP: () => {
@@ -63,6 +69,9 @@ const timerAPP = {
 
         const interval = setInterval(() => {
             timerAPP.seconds--;
+            timerAPP.actualSeconds--;
+            timerAPP.updateProgressBar();
+
             const minutsContainer = document.querySelector(".minuts__container");
             if (timerAPP.seconds < 0) {
                 timerAPP.seconds = 59;
@@ -76,6 +85,7 @@ const timerAPP = {
                 if (timerAPP.minuts <= 0) {
                     clearInterval(interval);
                     wakeLockAPI.unlockScreen();
+                    timerAPP.updateProgressBar();
                     timerAPP.seconds = 0;
 
                     document.querySelector("#p__app__btn__pause").outerHTML =
@@ -87,16 +97,17 @@ const timerAPP = {
                     timerAPP.isBreakTime = !timerAPP.isBreakTime;
                     if (timerAPP.isBreakTime === true) {
                         timerAPP.worksCounter++;
+                        localStorage.setItem("worksCounter", timerAPP.worksCounter);
 
-                        if (timerAPP.isBreakTime === true && timerAPP.worksCounter == 3) {
+                        if (timerAPP.isBreakTime === true && timerAPP.worksCounter > 2) {
                             timerAPP.startLongBreak();
                             timerAPP.worksCounter = 0;
                             localStorage.setItem("worksCounter", timerAPP.worksCounter);
                             roundsAPP.updateRoundsCounter();
                             roundsAPP.updateBreakStatus();
+                            return;
                         }
 
-                        localStorage.setItem("worksCounter", timerAPP.worksCounter);
                         roundsAPP.updateRoundsCounter();
                         roundsAPP.updateBreakStatus();
                         timerAPP.startShortBreak();
@@ -106,6 +117,9 @@ const timerAPP = {
                         const minutsContainer = document.querySelector(".minuts__container");
                         minutsContainer.innerHTML = timerAPP.minuts;
                         roundsAPP.updateRoundsCounter();
+                        timerAPP.totalSeconds = timerAPP.minuts * 60;
+                        timerAPP.actualSeconds = timerAPP.totalSeconds;
+                        timerAPP.updateProgressBar();
 
                         if (timerAPP.minuts < 10) {
                             minutsContainer.innerHTML = "0" + timerAPP.minuts;
@@ -136,6 +150,9 @@ const timerAPP = {
         timerAPP.minuts = parseInt(localStorage.getItem("shortBreak"));
         const minutsContainer = document.querySelector(".minuts__container");
         minutsContainer.innerHTML = timerAPP.minuts;
+        timerAPP.totalSeconds = timerAPP.minuts * 60;
+        timerAPP.actualSeconds = timerAPP.totalSeconds;
+        timerAPP.updateProgressBar();
 
         if (timerAPP.minuts < 10) {
             minutsContainer.innerHTML = "0" + timerAPP.minuts;
@@ -146,12 +163,19 @@ const timerAPP = {
         timerAPP.minuts = parseInt(localStorage.getItem("longBreak"));
         const minutsContainer = document.querySelector(".minuts__container");
         minutsContainer.innerHTML = timerAPP.minuts;
+        timerAPP.totalSeconds = timerAPP.minuts * 60;
+        timerAPP.actualSeconds = timerAPP.totalSeconds;
+        console.log("Long Break");
 
         if (timerAPP.minuts < 10) {
             minutsContainer.innerHTML = "0" + timerAPP.minuts;
         }
     },
 
+    updateProgressBar: () => {
+        const progressBar = document.querySelector('.p__app__progress__bar');
+        progressBar.style.backgroundImage = `conic-gradient(var(--color-main-dark), ${timerAPP.actualSeconds * 360 / timerAPP.totalSeconds}deg, var(--color-black-medium) 0deg)`;
+    },
 
     isPaused: (interval) => {
         clearInterval(interval);
@@ -165,7 +189,7 @@ const timerAPP = {
     restartTimerAPP: (interval) => {
         clearInterval(interval);
         timerAPP.minuts = parseInt(localStorage.getItem("defaultMinuts"));
-        if(timerAPP.minuts < 10){
+        if (timerAPP.minuts < 10) {
             document.querySelector(".minuts__container").innerHTML = "0" + timerAPP.minuts;
         } else {
             document.querySelector(".minuts__container").innerHTML = timerAPP.minuts;

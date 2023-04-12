@@ -16,7 +16,6 @@ const roundsAPP = {
             const rounds = document.querySelectorAll(".round");
             rounds.forEach(() => {
                 rounds[roundsAPP.round].classList.add("round__position");
-                console.log(roundsAPP.round);
                 
                 rounds.forEach((element) => {
                     if (element != rounds[roundsAPP.round]) {
