@@ -64,8 +64,10 @@ const timerAPP = {
     },
 
     startTimerAPP: () => {
-
+       
         wakeLockAPI.checkWakeLockCompatibility();
+
+        localStorage.setItem("is_Work_or_Break", timerAPP.minuts);
 
         const interval = setInterval(() => {
             timerAPP.seconds--;
@@ -188,7 +190,17 @@ const timerAPP = {
 
     restartTimerAPP: (interval) => {
         clearInterval(interval);
-        timerAPP.minuts = parseInt(localStorage.getItem("defaultMinuts"));
+
+        document.querySelector(".p__app__btn__play__container").innerHTML =
+            '<button class="p__app__btn" id="p__app__btn__play" onclick="timerAPP.startTimerAPP()">' +
+            '<img src="Images/app__play__image.png" alt="">' +
+            'Start ' +
+            '</button>';
+        
+        timerAPP.actualSeconds = timerAPP.totalSeconds; 
+        timerAPP.updateProgressBar();   
+
+        timerAPP.minuts = parseInt(localStorage.getItem("is_Work_or_Break"));
         if (timerAPP.minuts < 10) {
             document.querySelector(".minuts__container").innerHTML = "0" + timerAPP.minuts;
         } else {

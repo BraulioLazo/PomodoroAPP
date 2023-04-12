@@ -93,13 +93,13 @@ body {
 .p__app__section__home .p__app__container .p__app__termporizador__container .p__app__termporizador .p__app__progress__bar .p__app__number__temporizador__container .timer__container span {
   position: absolute;
   width: 50px;
-  /* valor fijo */
   font-size: 60px;
   font-weight: 800;
-  text-align: center;
 }
 .p__app__section__home .p__app__container .p__app__termporizador__container .p__app__termporizador .p__app__progress__bar .p__app__number__temporizador__container .timer__container .minuts__container {
-  left: -15px;
+  left: -25px;
+  width: 90px;
+  text-align: right;
 }
 .p__app__section__home .p__app__container .p__app__termporizador__container .p__app__termporizador .p__app__progress__bar .p__app__number__temporizador__container .timer__container .seconds__container {
   right: 15px;

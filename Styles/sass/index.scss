@@ -33,7 +33,7 @@
                     height: 100%;
                     padding: 10px;
                     border-radius: 50%;
-                    background-image: conic-gradient(var(--color-main-dark), 20deg, var(--color-black-medium) 0deg);
+                    background-image: conic-gradient(var(--color-main-dark), 360deg, var(--color-black-medium) 0deg);
 
                     .p__app__number__temporizador__container {
                         display: flex;
@@ -73,18 +73,14 @@
                             span {
                                 position: absolute;
                                 width: 50px;
-                                /* valor fijo */
                                 font-size: 60px;
                                 font-weight: 800;
-                                text-align: center;
-
                             }
 
-
-
                             .minuts__container {
-                                left: -15px;
-
+                                left: -25px;
+                                width: 90px;
+                                text-align: right;
                             }
 
                             .seconds__container {
