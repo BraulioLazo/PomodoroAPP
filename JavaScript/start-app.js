@@ -23,6 +23,7 @@ function startAPP() {
     document.querySelector("#factory__reset__btn").addEventListener("click", () => {
         settingAPP.factoryReset();
         settingAPP.defaultSetting();
+        location.reload();
     })
 }
 window.addEventListener("load", startAPP);
