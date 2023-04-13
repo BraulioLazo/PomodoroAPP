@@ -15,12 +15,31 @@ body {
   background-image: -webkit-linear-gradient(top, var(--color-black-dark), var(--color-black-ligth));
 }
 
+.p__app__btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  gap: 5px;
+  width: 100px;
+  padding: 12px;
+  border-radius: 100px;
+  background-color: var(--color-black-dark);
+  outline: none;
+  border: none;
+  box-shadow: -8px -8px 12px var(--shadow-ligth), 8px 8px 12px var(--shadow-dark);
+  cursor: pointer;
+}
+.p__app__btn img {
+  width: 15px;
+}
+
 :root {
   --color-black-dark: #1B1B1D;
   --color-black-medium: #25262A;
   --color-black-ligth: #33393E;
   --shadow-ligth: #363c42;
-  --shadow-dark: #141618;
+  --shadow-dark: #101113;
   --color-main-dark: #FF4A02;
   --color-main-ligth: #FF9430;
 }
@@ -145,24 +164,6 @@ body {
   border-radius: 20px;
   background-image: -webkit-linear-gradient(left top, var(--color-main-dark), var(--color-main-ligth));
 }
-.p__app__section__home .p__app__container .p__app__btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-  gap: 5px;
-  width: 100px;
-  padding: 12px;
-  border-radius: 100px;
-  background-color: var(--color-black-dark);
-  outline: none;
-  border: none;
-  box-shadow: -8px -8px 12px var(--shadow-ligth), 8px 8px 12px var(--shadow-dark);
-  cursor: pointer;
-}
-.p__app__section__home .p__app__container .p__app__btn img {
-  width: 15px;
-}
 .p__app__section__home .p__app__container .p__app__btn__play__container {
   display: flex;
   justify-content: center;
@@ -186,6 +187,94 @@ body {
 }
 .p__app__section__home .p__app__container .p__app__buttons__container button {
   width: 50%;
+}
+
+.p__app__section__setting {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  width: 0px;
+  height: 0px;
+  overflow: hidden;
+}
+.p__app__section__setting__container {
+  max-width: 400px;
+  padding: 15px;
+  border-radius: 15px;
+  box-shadow: -20px -20px 30px var(--shadow-ligth), 20px 20px 30px var(--shadow-dark);
+  background-image: -webkit-linear-gradient(top, var(--color-black-dark), var(--color-black-medium));
+}
+.p__app__section__setting__container P {
+  margin-bottom: 20px;
+}
+.p__app__section__setting__container #setting__form {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.p__app__section__setting__container #setting__form .form__lebel__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.p__app__section__setting__container #setting__form .form__lebel__container input[type=number]::-webkit-outer-spin-button,
+.p__app__section__setting__container #setting__form .form__lebel__container input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.p__app__section__setting__container #setting__form .form__lebel__container input {
+  width: 120px;
+  padding: 5px;
+  text-align: center;
+  background-color: var(--color-black-dark);
+  outline: none;
+  border: none;
+  border-radius: 80px;
+  box-shadow: inset -2px -2px 4px var(--shadow-ligth), inset 3px 3px 4px var(--shadow-dark);
+}
+.p__app__section__setting__container #setting__form .form__lebel__container input::placeholder {
+  color: rgba(211, 211, 211, 0.966);
+}
+.p__app__section__setting__container #setting__form .submit__user__setting__container {
+  display: flex;
+  align-items: center;
+  padding-top: 40px;
+}
+.p__app__section__setting__container #setting__form .submit__user__setting__container #factory__reset__btn {
+  width: fit-content;
+}
+.p__app__section__setting__container #setting__form .submit__user__setting__container #submit__user__setting {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  gap: 5px;
+  width: 100px;
+  padding: 12px 60px;
+  border-radius: 100px;
+  background-color: var(--color-black-dark);
+  outline: none;
+  border: none;
+  box-shadow: -8px -8px 12px var(--shadow-ligth), 8px 8px 12px var(--shadow-dark);
+  font-size: 16px;
+  background-image: -webkit-linear-gradient(left top, var(--color-main-dark), var(--color-main-ligth));
+  cursor: pointer;
+}
+
+.p__app__deploy__section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(15px);
 }
 
 /*# sourceMappingURL=styles.css.map */

@@ -7,67 +7,10 @@ const timerAPP = {
     totalRounds: null,
     isBreakTime: false,
 
-
-    setDefaultTimer: () => {
-
-        if (localStorage.getItem("defaultMinuts")) {
-            timerAPP.minuts = parseInt(localStorage.getItem("defaultMinuts"));
-            document.querySelector(".minuts__container").innerHTML = timerAPP.minuts;
-
-            if (timerAPP.minuts < 10) {
-                document.querySelector(".minuts__container").innerHTML = "0" + timerAPP.minuts;
-            }
-        } else {
-            localStorage.setItem("defaultMinuts", "25");
-            timerAPP.minuts = parseInt(localStorage.getItem("defaultMinuts"));
-            document.querySelector(".minuts__container").innerHTML = timerAPP.minuts;
-
-            if (timerAPP.minuts < 10) {
-                document.querySelector(".minuts__container").innerHTML = "0" + timerAPP.minuts;
-            }
-        }
-
-        if (localStorage.getItem("shortBreak")) {
-            timerAPP.shortBreak = parseInt(localStorage.getItem("shortBreak"));
-        } else {
-            localStorage.setItem("shortBreak", "5");
-            timerAPP.shortBreak = parseInt(localStorage.getItem("shortBreak"));
-        }
-
-        if (localStorage.getItem("longBreak")) {
-            timerAPP.longBreak = parseInt(localStorage.getItem("longBreak"));
-        } else {
-            localStorage.setItem("longBreak", "15");
-            timerAPP.longBreak = parseInt(localStorage.getItem("longBreak"));
-
-        }
-
-        if (localStorage.getItem("worksCounter")) {
-            timerAPP.worksCounter = parseInt(localStorage.getItem("worksCounter"));
-        } else {
-            localStorage.setItem("worksCounter", "0");
-            timerAPP.worksCounter = parseInt(localStorage.getItem("worksCounter"));
-        }
-
-        if (localStorage.getItem("totalRounds")) {
-            timerAPP.totalRounds = parseInt(localStorage.getItem("totalRounds"));
-            document.querySelector(".total__rounds").innerHTML = timerAPP.totalRounds;
-
-        } else {
-            localStorage.setItem("totalRounds", "3");
-            timerAPP.totalRounds = parseInt(localStorage.getItem("totalRounds"));
-            document.querySelector(".total__rounds").innerHTML = timerAPP.totalRounds;
-        }
-
-        timerAPP.totalSeconds = timerAPP.minuts * 60;
-        timerAPP.actualSeconds = timerAPP.totalSeconds;
-    },
-
     startTimerAPP: () => {
-       
-        wakeLockAPI.checkWakeLockCompatibility();
 
-        localStorage.setItem("is_Work_or_Break", timerAPP.minuts);
+        wakeLockAPI.checkWakeLockCompatibility();
+        timerAPP.isWorkOrBreak();
 
         const interval = setInterval(() => {
             timerAPP.seconds--;
@@ -174,6 +117,21 @@ const timerAPP = {
         }
     },
 
+    isWorkOrBreak: () => {
+        if (timerAPP.isBreakTime === false) {
+            const workTime = localStorage.getItem("defaultMinuts");
+            localStorage.setItem("is_Work_or_Break", workTime);
+        } else {
+            if (timerAPP.worksCounter < 3) {
+                const shortBreak = localStorage.getItem("shortBreak");
+                localStorage.setItem("is_Work_or_Break", shortBreak);
+            } else if (timerAPP.worksCounter === 3) {
+                const longBreak = localStorage.getItem("longBreak");
+                localStorage.setItem("is_Work_or_Break", longBreak);
+            }
+        }
+    },
+
     updateProgressBar: () => {
         const progressBar = document.querySelector('.p__app__progress__bar');
         progressBar.style.backgroundImage = `conic-gradient(var(--color-main-dark), ${timerAPP.actualSeconds * 360 / timerAPP.totalSeconds}deg, var(--color-black-medium) 0deg)`;
@@ -196,9 +154,9 @@ const timerAPP = {
             '<img src="Images/app__play__image.png" alt="">' +
             'Start ' +
             '</button>';
-        
-        timerAPP.actualSeconds = timerAPP.totalSeconds; 
-        timerAPP.updateProgressBar();   
+
+        timerAPP.actualSeconds = timerAPP.totalSeconds;
+        timerAPP.updateProgressBar();
 
         timerAPP.minuts = parseInt(localStorage.getItem("is_Work_or_Break"));
         if (timerAPP.minuts < 10) {
@@ -211,11 +169,6 @@ const timerAPP = {
         document.querySelector(".seconds__container").innerHTML = "0" + timerAPP.seconds;
 
         wakeLockAPI.unlockScreen();
-    },
-
-    temporaryReset: () => {
-        localStorage.clear();
-        location.reload();
     }
 
 };

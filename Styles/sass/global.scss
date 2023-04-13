@@ -13,3 +13,24 @@ body{
     min-height: 850px;
     background-image: -webkit-linear-gradient(top, var(--color-black-dark), var(--color-black-ligth));
 }
+
+.p__app__btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    gap: 5px;
+    width: 100px;
+    padding: 12px;
+    border-radius: 100px;
+    background-color: var(--color-black-dark);
+    outline: none;
+    border: none;
+    box-shadow: -8px -8px 12px var(--shadow-ligth),
+        8px 8px 12px var(--shadow-dark);
+    cursor: pointer;
+
+    img {
+        width: 15px;
+    }
+}

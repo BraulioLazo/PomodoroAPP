@@ -57,15 +57,50 @@
             <div class="p__app__btn__play__container">
                 <button class="p__app__btn" id="p__app__btn__play">
                     <img src="Images/app__play__image.png" alt="">
-                     Start 
+                    Start
                 </button>
             </div>
+        </div>
+    </section>
+
+    <section id="p__app__section__setting" class="p__app__section__setting">
+        <div class="p__app__section__setting__container">
+            <p>
+                Setting
+            </p>
+            <form id="setting__form">
+                <div class="form__lebel__container">
+                    <label for="work__time">Working Time</label>
+                    <input type="number" id="work__time" name="work__time" min="20" max="60">
+                </div>
+
+                <div class="form__lebel__container">
+                    <label for="short__break">Short Break</label>
+                    <input type="number" id="short__break" name="short__break" min="5" max="10">
+                </div>
+
+                <div class="form__lebel__container">
+                    <label for="long__break">Long Break</label>
+                    <input type="number" id="long__break" name="long__break" min="15" max="30">
+                </div>
+
+                <div class="form__lebel__container">
+                    <label for="rounds__numbers"> Rounds </label>
+                    <input type="number" id="total__rounds" name="total__rounds" min="3" max="10">
+                </div>
+
+                <div class="form__lebel__container submit__user__setting__container">
+                    <button class="p__app__btn" id="factory__reset__btn">Factory Reset</button>
+                    <input type="submit" id="submit__user__setting" value="Submit">
+                </div>
+            </form>
 
         </div>
     </section>
     <script src="JavaScript/fixing-styles.js"></script>
     <script src="JavaScript/API-Wake-Lock.js"></script>
-    <script src="JavaScript/rounds.js"></script>
+    <script src="JavaScript/roundsAPP.js"></script>
+    <script src="JavaScript/settingAPP.js"></script>
     <script src="JavaScript/timer.js"></script>
     <script src="JavaScript/start-app.js"></script>
 
