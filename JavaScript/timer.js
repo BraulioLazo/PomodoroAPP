@@ -1,4 +1,5 @@
 const timerAPP = {
+    interval: null,
     minuts: 0,
     seconds: 0,
     worksCounter: 0,
@@ -12,7 +13,7 @@ const timerAPP = {
         wakeLockAPI.checkWakeLockCompatibility();
         timerAPP.isWorkOrBreak();
 
-        const interval = setInterval(() => {
+        timerAPP.interval = setInterval(() => {
             timerAPP.seconds--;
             timerAPP.actualSeconds--;
             timerAPP.updateProgressBar();
@@ -28,7 +29,7 @@ const timerAPP = {
                     minutsContainer.innerHTML = "0" + timerAPP.minuts;
                 }
                 if (timerAPP.minuts <= 0) {
-                    clearInterval(interval);
+                    clearInterval(timerAPP.interval);
                     wakeLockAPI.unlockScreen();
                     timerAPP.updateProgressBar();
                     timerAPP.seconds = 0;
@@ -81,13 +82,13 @@ const timerAPP = {
         }, 1000);
 
         document.querySelector("#p__app__btn__play").outerHTML =
-            '<button class="p__app__btn" id="p__app__btn__pause" onclick="timerAPP.isPaused(\'' + interval + '\')">' +
+            '<button class="p__app__btn" id="p__app__btn__pause" onclick="timerAPP.isPaused(\'' + timerAPP.interval + '\')">' +
             '<img src="Images/app__pause__image.png" alt="">' +
             'Pause' +
             '</button>';
 
         document.querySelector("#p__app__reset__button").onclick = () => {
-            timerAPP.restartTimerAPP(interval);
+            timerAPP.restartTimerAPP();
         };
     },
 
@@ -137,8 +138,8 @@ const timerAPP = {
         progressBar.style.backgroundImage = `conic-gradient(var(--color-main-dark), ${timerAPP.actualSeconds * 360 / timerAPP.totalSeconds}deg, var(--color-black-medium) 0deg)`;
     },
 
-    isPaused: (interval) => {
-        clearInterval(interval);
+    isPaused: () => {
+        clearInterval(timerAPP.interval);
         document.querySelector("#p__app__btn__pause").outerHTML =
             '<button class="p__app__btn" id="p__app__btn__play" onclick="timerAPP.startTimerAPP()">' +
             '<img src="Images/app__play__image.png" alt="">' +
@@ -146,8 +147,8 @@ const timerAPP = {
             '</button>';
     },
 
-    restartTimerAPP: (interval) => {
-        clearInterval(interval);
+    restartTimerAPP: () => {
+        clearInterval(timerAPP.interval);
 
         document.querySelector(".p__app__btn__play__container").innerHTML =
             '<button class="p__app__btn" id="p__app__btn__play" onclick="timerAPP.startTimerAPP()">' +

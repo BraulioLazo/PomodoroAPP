@@ -10,7 +10,9 @@ function startAPP() {
     });
 
     document.querySelector("#p__app__customize__button").onclick = () => {
+        clearInterval(timerAPP.interval)
         settingAPP.deploySetting();
+
     };
 
     document.querySelector("#setting__form").addEventListener("submit", (event) => {
