@@ -9,6 +9,7 @@ const roundsAPP = {
         for (let index = 0; index < timerAPP.totalRounds; index++) {
             const roundElement = document.createElement("div");
             roundElement.classList.add("round");
+            
             roundsElementsContainer.appendChild(roundElement);
         }
     },

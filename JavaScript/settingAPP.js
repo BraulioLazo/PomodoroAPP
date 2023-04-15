@@ -90,6 +90,16 @@ const settingAPP = {
         settingAPP.deploySetting();
     },
 
+    factoryReset: () => {
+         localStorage.clear();
+         settingAPP.defaultSetting();
+         roundsAPP.updateRoundsElements();
+        roundsAPP.updateRoundsCounter();
+        timerAPP.updateProgressBar();
+
+        settingAPP.deploySetting();
+    },
+
     deploySetting: () => {
         document.querySelector(".p__app__section__setting").classList.toggle("p__app__deploy__section");
 
@@ -97,10 +107,6 @@ const settingAPP = {
         document.querySelector("#short__break").value = localStorage.getItem("shortBreak");
         document.querySelector("#long__break").value = localStorage.getItem("longBreak");
         document.querySelector("#total__rounds").value = localStorage.getItem("totalRounds");
-    },
-
-    factoryReset: () => {
-        localStorage.clear();
     }
 };
 

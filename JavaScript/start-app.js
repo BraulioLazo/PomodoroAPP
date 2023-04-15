@@ -22,11 +22,9 @@ function startAPP() {
         settingAPP.userSetting();
     });
 
-    document.querySelector("#factory__reset__btn").addEventListener("click", () => {
+    document.querySelector("#factory__reset__btn").onclick =  () => {
         settingAPP.factoryReset();
-        settingAPP.defaultSetting();
-        location.reload();
-    })
+    }
 }
 window.addEventListener("load", startAPP);
 
