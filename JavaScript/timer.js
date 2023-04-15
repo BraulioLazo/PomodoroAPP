@@ -124,10 +124,10 @@ const timerAPP = {
             const workTime = localStorage.getItem("defaultMinuts");
             localStorage.setItem("is_Work_or_Break", workTime);
         } else {
-            if (timerAPP.worksCounter < 3) {
+            if (timerAPP.worksCounter < timerAPP.totalRounds) {
                 const shortBreak = localStorage.getItem("shortBreak");
                 localStorage.setItem("is_Work_or_Break", shortBreak);
-            } else if (timerAPP.worksCounter === 3) {
+            } else if (timerAPP.worksCounter == timerAPP.totalRounds) {
                 const longBreak = localStorage.getItem("longBreak");
                 localStorage.setItem("is_Work_or_Break", longBreak);
             }

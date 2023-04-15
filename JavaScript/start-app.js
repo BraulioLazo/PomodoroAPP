@@ -25,6 +25,14 @@ function startAPP() {
     document.querySelector("#factory__reset__btn").onclick =  () => {
         settingAPP.factoryReset();
     }
+
+    document.querySelector(".p__app__section__setting").onclick = (event) => {
+        if(event.target.classList.contains("p__app__deploy__section")){
+            settingAPP.deploySetting();
+            console.log(event)
+        }
+    };
+    
 }
 window.addEventListener("load", startAPP);
 

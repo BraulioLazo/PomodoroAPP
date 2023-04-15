@@ -86,14 +86,16 @@ const settingAPP = {
         roundsAPP.updateRoundsCounter();
         timerAPP.restartTimerAPP();
         timerAPP.updateProgressBar();
-        
+
         settingAPP.deploySetting();
     },
 
     factoryReset: () => {
-         localStorage.clear();
-         settingAPP.defaultSetting();
-         roundsAPP.updateRoundsElements();
+        localStorage.clear();
+        settingAPP.defaultSetting();
+        timerAPP.isWorkOrBreak();
+        timerAPP.restartTimerAPP();
+        roundsAPP.updateRoundsElements();
         roundsAPP.updateRoundsCounter();
         timerAPP.updateProgressBar();
 
