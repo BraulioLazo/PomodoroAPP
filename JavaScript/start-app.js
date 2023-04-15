@@ -4,7 +4,7 @@ function startAPP() {
 
     settingAPP.defaultSetting();
     roundsAPP.updateRoundsElements();
-    roundsAPP.updateRoundsCounter()
+    roundsAPP.updateRoundsCounter();
 
     const buttonStartTimer = document.querySelector("#p__app__btn__play");
     buttonStartTimer.addEventListener("click", () => {
@@ -12,7 +12,7 @@ function startAPP() {
     });
 
     document.querySelector("#p__app__customize__button").onclick = () => {
-        clearInterval(timerAPP.interval)
+        timerAPP.isPaused();
         settingAPP.deploySetting();
 
     };
@@ -22,17 +22,16 @@ function startAPP() {
         settingAPP.userSetting();
     });
 
-    document.querySelector("#factory__reset__btn").onclick =  () => {
+    document.querySelector("#factory__reset__btn").onclick = () => {
         settingAPP.factoryReset();
-    }
+    };
 
     document.querySelector(".p__app__section__setting").onclick = (event) => {
-        if(event.target.classList.contains("p__app__deploy__section")){
+        if (event.target.classList.contains("p__app__deploy__section")) {
             settingAPP.deploySetting();
-            console.log(event)
         }
     };
-    
+
 }
 window.addEventListener("load", startAPP);
 
