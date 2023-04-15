@@ -70,17 +70,21 @@ const settingAPP = {
         const shortBreak = document.querySelector("#short__break").value;
         const longBreak = document.querySelector("#long__break").value;
         const totalRounds = document.querySelector("#total__rounds").value;
-    
+
         localStorage.setItem("defaultMinuts", workTime);
         localStorage.setItem("shortBreak", shortBreak);
         localStorage.setItem("longBreak", longBreak);
         localStorage.setItem("totalRounds", totalRounds);
-    
+
         timerAPP.totalRounds = totalRounds;
-    
+
+        timerAPP.totalSeconds = timerAPP.minuts * 60;
+        timerAPP.actualSeconds = timerAPP.totalSeconds;
+
         timerAPP.isWorkOrBreak();
         roundsAPP.updateRoundsCounter();
         timerAPP.restartTimerAPP();
+        timerAPP.updateProgressBar();
         settingAPP.deploySetting();
     },
 
