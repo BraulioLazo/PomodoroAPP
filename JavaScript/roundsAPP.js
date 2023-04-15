@@ -2,6 +2,17 @@ const roundsAPP = {
     round: 0,
     roundsContainer: null,
 
+    updateRoundsElements: () => {
+        const roundsElementsContainer =  document.querySelector(".round__position__qty");
+        roundsElementsContainer.innerHTML = "";
+
+        for (let index = 0; index < timerAPP.totalRounds; index++) {
+            const roundElement = document.createElement("div");
+            roundElement.classList.add("round");
+            roundsElementsContainer.appendChild(roundElement);
+        }
+    },
+
     updateRoundsCounter: () => {
         roundsAPP.round = parseInt(localStorage.getItem("worksCounter"));
         roundsAPP.roundsContainer = document.querySelector(".rounds__counter");

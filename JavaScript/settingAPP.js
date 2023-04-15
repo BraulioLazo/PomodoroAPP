@@ -82,9 +82,11 @@ const settingAPP = {
         timerAPP.actualSeconds = timerAPP.totalSeconds;
 
         timerAPP.isWorkOrBreak();
+        roundsAPP.updateRoundsElements();
         roundsAPP.updateRoundsCounter();
         timerAPP.restartTimerAPP();
         timerAPP.updateProgressBar();
+        
         settingAPP.deploySetting();
     },
 

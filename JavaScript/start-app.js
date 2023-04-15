@@ -3,6 +3,8 @@ function startAPP() {
     window.onresize = () => { temporizadorStyles(); };
 
     settingAPP.defaultSetting();
+    roundsAPP.updateRoundsElements();
+    roundsAPP.updateRoundsCounter()
 
     const buttonStartTimer = document.querySelector("#p__app__btn__play");
     buttonStartTimer.addEventListener("click", () => {

@@ -45,12 +45,13 @@ const timerAPP = {
                         timerAPP.worksCounter++;
                         localStorage.setItem("worksCounter", timerAPP.worksCounter);
 
-                        if (timerAPP.isBreakTime === true && timerAPP.worksCounter > 2) {
+                        if (timerAPP.isBreakTime === true && timerAPP.worksCounter == timerAPP.totalRounds) {
                             timerAPP.startLongBreak();
                             timerAPP.worksCounter = 0;
                             localStorage.setItem("worksCounter", timerAPP.worksCounter);
                             roundsAPP.updateRoundsCounter();
                             roundsAPP.updateBreakStatus();
+                            timerAPP.updateProgressBar();
                             return;
                         }
 
