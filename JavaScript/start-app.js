@@ -2,6 +2,8 @@ function startAPP() {
     temporizadorStyles();
     window.onresize = () => { temporizadorStyles(); };
 
+
+
     settingAPP.defaultSetting();
     roundsAPP.updateRoundsElements();
     roundsAPP.updateRoundsCounter();
@@ -31,6 +33,20 @@ function startAPP() {
             settingAPP.deploySetting();
         }
     };
+
+    document.querySelector("#full__screen__btn").onclick = () => {
+        if (fullScreenAPI.isFullScreenEnabled === false) {
+            fullScreenAPI.fullScreenCompatibility();
+        } else {
+            fullScreenAPI.cancelFullScreen();
+        }
+    };
+
+    document.addEventListener('fullscreenchange',  () => {
+       fullScreenAPI.handleFullScreenChange();
+    });
+
+
 
 }
 window.addEventListener("load", startAPP);

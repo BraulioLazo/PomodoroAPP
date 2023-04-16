@@ -45,6 +45,7 @@ body {
 }
 
 .p__app__section__home {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -52,6 +53,13 @@ body {
   width: 100%;
   height: 100%;
   padding: 30px;
+}
+.p__app__section__home #full__screen__btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: fit-content;
+  background-image: -webkit-linear-gradient(top left, var(--color-main-ligth), var(--color-main-dark));
 }
 .p__app__section__home .p__app__container {
   display: flex;
