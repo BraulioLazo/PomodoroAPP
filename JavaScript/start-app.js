@@ -50,7 +50,9 @@ function startAPP() {
         fullScreenAPI.handleFullScreenChange();
     });
 
-
+    document.addEventListener('visibilitychange', (event) => {
+        alert("Captura de pantalla");
+    });
 
 }
 window.addEventListener("load", startAPP);

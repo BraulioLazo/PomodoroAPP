@@ -29,8 +29,6 @@ const fullScreenAPI = {
             }
 
             fullScreenAPI.isFullScreenEnabled = true;
-
-            console.log(fullScreenAPI.isFullScreenEnabled);
         } catch (error) {
             console.error("Error en la peticion FULL SCREEN:" + error);
         }
@@ -67,7 +65,6 @@ const fullScreenAPI = {
                 '<button class="p__app__btn" id="full__screen__btn" onclick="fullScreenAPI.cancelFullScreen();">' +
                     'Cancel Full Screen' +
                 '</button>';
-            console.log("isFullScreenEnabled: " + fullScreenAPI.isFullScreenEnabled);
 
         } else {
             fullScreenAPI.isFullScreenEnabled = false;
@@ -75,7 +72,6 @@ const fullScreenAPI = {
             '<button class="p__app__btn" id="full__screen__btn" onclick="fullScreenAPI.goFullScreen()">' +
                 'Active Full Screen' +
             '</button>';
-            console.log("isFullScreenEnabled: " + fullScreenAPI.isFullScreenEnabled);
         }
     }
 };

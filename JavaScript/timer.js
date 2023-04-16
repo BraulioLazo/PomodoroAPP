@@ -28,7 +28,7 @@ const timerAPP = {
                 if (timerAPP.minuts < 10) {
                     minutsContainer.innerHTML = "0" + timerAPP.minuts;
                 }
-                if (timerAPP.minuts <= 0) {
+                if (timerAPP.minuts < 0) {
                     clearInterval(timerAPP.interval);
                     wakeLockAPI.unlockScreen();
                     timerAPP.updateProgressBar();

@@ -1,6 +1,7 @@
 const wakeLockAPI = {
 
     wakeLockObj: null,
+    isWakeLockEnable: false,
 
     checkWakeLockCompatibility: () => {
         if ("wakeLock" in navigator) {
@@ -17,6 +18,7 @@ const wakeLockAPI = {
                 return;
             }
             wakeLockAPI.wakeLockObj = await navigator.wakeLock.request('screen');
+            wakeLockAPI.isWakeLockEnable = true;
             console.log("pantalla Bloqueda correctamente");
             console.log(wakeLockAPI.wakeLockObj);
         } catch (error) {
@@ -31,6 +33,7 @@ const wakeLockAPI = {
                 return;
             }
             await wakeLockAPI.wakeLockObj.release();
+            wakeLockAPI.isWakeLockEnable = false;
             console.log("Pantalla desbloqueada");
             console.log(wakeLockAPI.wakeLockObj);
             wakeLockAPI.wakeLockObj = null;
