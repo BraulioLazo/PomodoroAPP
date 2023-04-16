@@ -8,6 +8,7 @@
     height: 100%;
     padding: 30px;
     background-image: -webkit-linear-gradient(top, var(--color-black-dark), var(--color-black-ligth));
+    z-index: 1;
 
 
     #full__screen__btn{
@@ -189,12 +190,13 @@
 }
 
 .p__app__section__setting {
-    position: fixed;
+    position: absolute;
     top: 0px;
     right: 0px;
     width: 0px;
     height: 0px;
     overflow: hidden;
+    z-index: 999;
 
     &__container {
         max-width: 400px;

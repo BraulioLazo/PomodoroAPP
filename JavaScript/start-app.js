@@ -14,9 +14,13 @@ function startAPP() {
     });
 
     document.querySelector("#p__app__customize__button").onclick = () => {
-        timerAPP.isPaused();
+        clearInterval(timerAPP.interval);
+        document.querySelector(".p__app__btn__play__container").innerHTML =
+            '<button class="p__app__btn" id="p__app__btn__play" onclick="timerAPP.startTimerAPP()">' +
+            '<img src="Images/app__play__image.png" alt="">' +
+            'Start' +
+            '</button>';
         settingAPP.deploySetting();
-
     };
 
     document.querySelector("#setting__form").addEventListener("submit", (event) => {
@@ -42,8 +46,8 @@ function startAPP() {
         }
     };
 
-    document.addEventListener('fullscreenchange',  () => {
-       fullScreenAPI.handleFullScreenChange();
+    document.addEventListener('fullscreenchange', () => {
+        fullScreenAPI.handleFullScreenChange();
     });
 
 
