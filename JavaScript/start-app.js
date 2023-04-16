@@ -51,7 +51,16 @@ function startAPP() {
     });
 
     document.addEventListener('visibilitychange', (event) => {
-        alert("Captura de pantalla");
+        if (document.visibilityState === "hidden" && wakeLockAPI.wakeLockObj != null) {
+            clearInterval(timerAPP.interval);
+            document.querySelector(".p__app__btn__play__container").innerHTML =
+                '<button class="p__app__btn" id="p__app__btn__play" onclick="timerAPP.startTimerAPP()">' +
+                '<img src="Images/app__play__image.png" alt="">' +
+                'Start' +
+                '</button>';
+            console.log(wakeLockAPI.wakeLockObj);
+            wakeLockAPI.wakeLockObj = null;
+        }
     });
 
 }
