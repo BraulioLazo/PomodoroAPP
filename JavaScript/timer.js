@@ -1,4 +1,5 @@
 const timerAPP = {
+    bell: new Audio('audio/bell__end__timer.wav'),
     interval: null,
     minuts: 0,
     seconds: 0,
@@ -20,7 +21,7 @@ const timerAPP = {
 
             const minutsContainer = document.querySelector(".minuts__container");
             if (timerAPP.seconds < 0) {
-                timerAPP.seconds = 59;
+                timerAPP.seconds = 1;
 
                 timerAPP.minuts--;
                 minutsContainer.innerHTML = timerAPP.minuts;
@@ -30,6 +31,7 @@ const timerAPP = {
                 }
                 if (timerAPP.minuts < 0) {
                     clearInterval(timerAPP.interval);
+                    timerAPP.bell.play();
                     wakeLockAPI.unlockScreen();
                     timerAPP.updateProgressBar();
                     timerAPP.seconds = 0;
