@@ -77,6 +77,7 @@ const settingAPP = {
         localStorage.setItem("totalRounds", totalRounds);
 
         timerAPP.totalRounds = totalRounds;
+        timerAPP.minuts = workTime;
 
         timerAPP.totalSeconds = timerAPP.minuts * 60;
         timerAPP.actualSeconds = timerAPP.totalSeconds;
@@ -88,6 +89,8 @@ const settingAPP = {
         timerAPP.updateProgressBar();
 
         settingAPP.deploySetting();
+
+        console.log(timerAPP.totalSeconds)
     },
 
     factoryReset: () => {
