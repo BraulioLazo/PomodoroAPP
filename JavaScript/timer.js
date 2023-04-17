@@ -21,7 +21,7 @@ const timerAPP = {
 
             const minutsContainer = document.querySelector(".minuts__container");
             if (timerAPP.seconds < 0) {
-                timerAPP.seconds = 1;
+                timerAPP.seconds = 59;
 
                 timerAPP.minuts--;
                 minutsContainer.innerHTML = timerAPP.minuts;
